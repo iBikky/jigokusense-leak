@@ -1,0 +1,61 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
+/*
+ * Decompiled with CFR 0.151.
+ * 
+ * Could not load the following classes:
+ *  net.minecraft.client.Minecraft
+ *  net.minecraft.client.gui.GuiScreen
+ */
+package com.lukflug.panelstudio.mc12;
+
+import com.lukflug.panelstudio.ClickGUI;
+import com.lukflug.panelstudio.hud.HUDClickGUI;
+import com.lukflug.panelstudio.mc12.MinecraftGUI;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+
+public abstract class MinecraftHUDGUI
+extends MinecraftGUI {
+    protected boolean hudEditor = false;
+
+    @Override
+    public void enterGUI() {
+        this.hudEditor = false;
+        super.enterGUI();
+    }
+
+    @Override
+    public void exitGUI() {
+        this.hudEditor = false;
+        super.exitGUI();
+    }
+
+    public void enterHUDEditor() {
+        this.hudEditor = true;
+        if (this.getHUDGUI().isOn()) {
+            this.getHUDGUI().toggle();
+        }
+        Minecraft.getMinecraft().displayGuiScreen((GuiScreen)this);
+    }
+
+    public void render() {
+        if (!this.getHUDGUI().isOn() && !this.hudEditor) {
+            this.renderGUI();
+        }
+    }
+
+    public void handleKeyEvent(int scancode) {
+        if (scancode != 1 && !this.getHUDGUI().isOn() && !this.hudEditor) {
+            this.getHUDGUI().handleKey(scancode);
+        }
+    }
+
+    protected abstract HUDClickGUI getHUDGUI();
+
+    @Override
+    protected ClickGUI getGUI() {
+        return this.getHUDGUI();
+    }
+}
+
