@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -44,35 +46,35 @@ extends Module {
         this.startPos = PlayerUtil.getPlayerPos();
         this.retryPos = new ArrayList();
         if (this.center.getValue()) {
-            double y = Surround.mc.field_71439_g.func_180425_c().func_177956_o();
-            double x = Surround.mc.field_71439_g.func_180425_c().func_177958_n();
-            double z = Surround.mc.field_71439_g.func_180425_c().func_177952_p();
+            double y = Surround.mc.player.getPosition().getY();
+            double x = Surround.mc.player.getPosition().getX();
+            double z = Surround.mc.player.getPosition().getZ();
             Vec3d plusPlus = new Vec3d(x + 0.5, y, z + 0.5);
             Vec3d plusMinus = new Vec3d(x + 0.5, y, z - 0.5);
             Vec3d minusMinus = new Vec3d(x - 0.5, y, z - 0.5);
             Vec3d minusPlus = new Vec3d(x - 0.5, y, z + 0.5);
             if (this.getDst(plusPlus) < this.getDst(plusMinus) && this.getDst(plusPlus) < this.getDst(minusMinus) && this.getDst(plusPlus) < this.getDst(minusPlus)) {
-                x = (double)Surround.mc.field_71439_g.func_180425_c().func_177958_n() + 0.5;
-                z = (double)Surround.mc.field_71439_g.func_180425_c().func_177952_p() + 0.5;
+                x = (double)Surround.mc.player.getPosition().getX() + 0.5;
+                z = (double)Surround.mc.player.getPosition().getZ() + 0.5;
                 this.centerPlayer(x, y, z);
             }
             if (this.getDst(plusMinus) < this.getDst(plusPlus) && this.getDst(plusMinus) < this.getDst(minusMinus) && this.getDst(plusMinus) < this.getDst(minusPlus)) {
-                x = (double)Surround.mc.field_71439_g.func_180425_c().func_177958_n() + 0.5;
-                z = (double)Surround.mc.field_71439_g.func_180425_c().func_177952_p() - 0.5;
+                x = (double)Surround.mc.player.getPosition().getX() + 0.5;
+                z = (double)Surround.mc.player.getPosition().getZ() - 0.5;
                 this.centerPlayer(x, y, z);
             }
             if (this.getDst(minusMinus) < this.getDst(plusPlus) && this.getDst(minusMinus) < this.getDst(plusMinus) && this.getDst(minusMinus) < this.getDst(minusPlus)) {
-                x = (double)Surround.mc.field_71439_g.func_180425_c().func_177958_n() - 0.5;
-                z = (double)Surround.mc.field_71439_g.func_180425_c().func_177952_p() - 0.5;
+                x = (double)Surround.mc.player.getPosition().getX() - 0.5;
+                z = (double)Surround.mc.player.getPosition().getZ() - 0.5;
                 this.centerPlayer(x, y, z);
             }
             if (this.getDst(minusPlus) < this.getDst(plusPlus) && this.getDst(minusPlus) < this.getDst(plusMinus) && this.getDst(minusPlus) < this.getDst(minusMinus)) {
-                x = (double)Surround.mc.field_71439_g.func_180425_c().func_177958_n() - 0.5;
-                z = (double)Surround.mc.field_71439_g.func_180425_c().func_177952_p() + 0.5;
+                x = (double)Surround.mc.player.getPosition().getX() - 0.5;
+                z = (double)Surround.mc.player.getPosition().getZ() + 0.5;
                 this.centerPlayer(x, y, z);
             }
         }
-        this.posY = Surround.mc.field_71439_g.field_70163_u;
+        this.posY = Surround.mc.player.posY;
     }
 
     @Override
@@ -81,7 +83,7 @@ extends Module {
             this.toggle();
             return;
         }
-        if (this.posY < Surround.mc.field_71439_g.field_70163_u) {
+        if (this.posY < Surround.mc.player.posY) {
             this.toggle();
             return;
         }
@@ -116,16 +118,16 @@ extends Module {
 
     private BlockPos addPos(BlockPos pos) {
         BlockPos pPos = PlayerUtil.getPlayerPos(0.2);
-        return new BlockPos(pPos.func_177958_n() + pos.func_177958_n(), pPos.func_177956_o() + pos.func_177956_o(), pPos.func_177952_p() + pos.func_177952_p());
+        return new BlockPos(pPos.getX() + pos.getX(), pPos.getY() + pos.getY(), pPos.getZ() + pos.getZ());
     }
 
     private double getDst(Vec3d vec) {
-        return Surround.mc.field_71439_g.func_174791_d().func_72438_d(vec);
+        return Surround.mc.player.getPositionVector().distanceTo(vec);
     }
 
     private void centerPlayer(double x, double y, double z) {
-        Surround.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayer.Position(x, y, z, true));
-        Surround.mc.field_71439_g.func_70107_b(x, y, z);
+        Surround.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, true));
+        Surround.mc.player.setPosition(x, y, z);
     }
 }
 

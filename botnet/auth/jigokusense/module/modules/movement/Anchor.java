@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -16,11 +18,11 @@ extends Module {
 
     @Override
     public void update() {
-        if (Anchor.mc.field_71439_g.func_70090_H() || Anchor.mc.field_71439_g.func_180799_ab()) {
+        if (Anchor.mc.player.isInWater() || Anchor.mc.player.isInLava()) {
             return;
         }
-        if (Anchor.mc.field_71439_g.field_70122_E) {
-            Anchor.mc.field_71439_g.field_70181_x -= this.speed.getValue() / 7.0;
+        if (Anchor.mc.player.onGround) {
+            Anchor.mc.player.motionY -= this.speed.getValue() / 7.0;
         }
     }
 }

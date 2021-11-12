@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -32,25 +34,25 @@ extends Module {
 
     @Override
     public void update() {
-        if (this.weather.getValue() && NoRender.mc.field_71441_e.func_72896_J()) {
-            NoRender.mc.field_71441_e.func_72894_k(0.0f);
+        if (this.weather.getValue() && NoRender.mc.world.isRaining()) {
+            NoRender.mc.world.setRainStrength(0.0f);
         }
         if (this.items.getValue()) {
-            NoRender.mc.field_71441_e.field_72996_f.stream().filter(EntityItem.class::isInstance).map(EntityItem.class::cast).forEach(Entity::func_70106_y);
+            NoRender.mc.world.loadedEntityList.stream().filter(EntityItem.class::isInstance).map(EntityItem.class::cast).forEach(Entity::setDead);
         }
     }
 
     @Override
     public void onEnable() {
         if (this.viewBobbing.getValue()) {
-            NoRender.mc.field_71474_y.field_74336_f = false;
+            NoRender.mc.gameSettings.viewBobbing = false;
         }
     }
 
     @Override
     public void onDisable() {
         if (this.viewBobbing.getValue()) {
-            NoRender.mc.field_71474_y.field_74336_f = true;
+            NoRender.mc.gameSettings.viewBobbing = true;
         }
     }
 

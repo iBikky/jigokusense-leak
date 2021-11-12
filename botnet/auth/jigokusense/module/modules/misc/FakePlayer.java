@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -28,25 +30,25 @@ extends Module {
 
     @Override
     public void onEnable() {
-        if (FakePlayer.mc.field_71439_g.field_70128_L) {
+        if (FakePlayer.mc.player.isDead) {
             this.disable();
             return;
         }
-        this.bot = new EntityOtherPlayerMP((World)FakePlayer.mc.field_71441_e, new GameProfile(UUID.fromString("5a49ea7d-c511-46e2-a9d4-03fa8793978c"), "AK6969"));
-        this.bot.func_82149_j((Entity)FakePlayer.mc.field_71439_g);
-        this.bot.field_70759_as = FakePlayer.mc.field_71439_g.field_70759_as;
-        this.bot.field_70177_z = FakePlayer.mc.field_71439_g.field_70177_z;
-        this.bot.field_70125_A = FakePlayer.mc.field_71439_g.field_70125_A;
-        this.bot.func_71033_a(GameType.SURVIVAL);
-        this.bot.func_70606_j(20.0f);
-        FakePlayer.mc.field_71441_e.func_73027_a(-1337, (Entity)this.bot);
-        this.bot.func_70636_d();
+        this.bot = new EntityOtherPlayerMP((World)FakePlayer.mc.world, new GameProfile(UUID.fromString("5a49ea7d-c511-46e2-a9d4-03fa8793978c"), "AK6969"));
+        this.bot.copyLocationAndAnglesFrom((Entity)FakePlayer.mc.player);
+        this.bot.rotationYawHead = FakePlayer.mc.player.rotationYawHead;
+        this.bot.rotationYaw = FakePlayer.mc.player.rotationYaw;
+        this.bot.rotationPitch = FakePlayer.mc.player.rotationPitch;
+        this.bot.setGameType(GameType.SURVIVAL);
+        this.bot.setHealth(20.0f);
+        FakePlayer.mc.world.addEntityToWorld(-1337, (Entity)this.bot);
+        this.bot.onLivingUpdate();
     }
 
     @Override
     public void onDisable() {
-        if (FakePlayer.mc.field_71441_e != null) {
-            FakePlayer.mc.field_71441_e.func_73028_b(-1337);
+        if (FakePlayer.mc.world != null) {
+            FakePlayer.mc.world.removeEntityFromWorld(-1337);
         }
     }
 }

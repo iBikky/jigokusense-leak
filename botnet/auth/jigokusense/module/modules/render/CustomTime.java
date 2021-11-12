@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -31,17 +33,17 @@ extends Module {
 
     @Override
     public void onEnable() {
-        this.time = CustomTime.mc.field_71441_e.func_72820_D();
+        this.time = CustomTime.mc.world.getWorldTime();
     }
 
     @Override
     public void update() {
-        CustomTime.mc.field_71441_e.func_72877_b((long)this.clientTime.getValue());
+        CustomTime.mc.world.setWorldTime((long)this.clientTime.getValue());
     }
 
     @Override
     public void onDisable() {
-        CustomTime.mc.field_71441_e.func_72877_b(this.time);
+        CustomTime.mc.world.setWorldTime(this.time);
     }
 }
 

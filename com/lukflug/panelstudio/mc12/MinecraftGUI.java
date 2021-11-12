@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -22,13 +24,13 @@ extends GuiScreen {
     private boolean rButton = false;
 
     public void enterGUI() {
-        Minecraft.func_71410_x().func_147108_a((GuiScreen)this);
+        Minecraft.getMinecraft().displayGuiScreen((GuiScreen)this);
         this.getGUI().enter();
     }
 
     public void exitGUI() {
         this.getGUI().exit();
-        Minecraft.func_71410_x().func_147108_a(null);
+        Minecraft.getMinecraft().displayGuiScreen(null);
     }
 
     protected void renderGUI() {
@@ -38,7 +40,7 @@ extends GuiScreen {
         GLInterface.end();
     }
 
-    public void func_73863_a(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.mouse = new Point(mouseX, mouseY);
         this.renderGUI();
         int scroll = Mouse.getDWheel();
@@ -51,7 +53,7 @@ extends GuiScreen {
         }
     }
 
-    public void func_73864_a(int mouseX, int mouseY, int clickedButton) {
+    public void mouseClicked(int mouseX, int mouseY, int clickedButton) {
         this.mouse = new Point(mouseX, mouseY);
         switch (clickedButton) {
             case 0: {
@@ -65,7 +67,7 @@ extends GuiScreen {
         this.getGUI().handleButton(clickedButton);
     }
 
-    public void func_146286_b(int mouseX, int mouseY, int releaseButton) {
+    public void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         this.mouse = new Point(mouseX, mouseY);
         switch (releaseButton) {
             case 0: {
@@ -79,7 +81,7 @@ extends GuiScreen {
         this.getGUI().handleButton(releaseButton);
     }
 
-    protected void func_73869_a(char typedChar, int keyCode) {
+    protected void keyTyped(char typedChar, int keyCode) {
         if (keyCode == 1) {
             this.exitGUI();
         } else {
@@ -87,7 +89,7 @@ extends GuiScreen {
         }
     }
 
-    public boolean func_73868_f() {
+    public boolean doesGuiPauseGame() {
         return false;
     }
 
@@ -123,7 +125,7 @@ extends GuiScreen {
 
         @Override
         protected float getZLevel() {
-            return MinecraftGUI.this.field_73735_i;
+            return MinecraftGUI.this.zLevel;
         }
     }
 }

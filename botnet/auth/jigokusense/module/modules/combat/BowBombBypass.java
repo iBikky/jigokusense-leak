@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -26,10 +28,10 @@ extends Module {
 
     @Override
     public void update() {
-        if (BowBombBypass.mc.field_71439_g.field_71071_by.func_70448_g().func_77973_b() instanceof ItemBow && BowBombBypass.mc.field_71439_g.func_184587_cr() && BowBombBypass.mc.field_71439_g.func_184612_cw() >= 3) {
-            BowBombBypass.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.field_177992_a, BowBombBypass.mc.field_71439_g.func_174811_aO()));
-            BowBombBypass.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(BowBombBypass.mc.field_71439_g.func_184600_cs()));
-            BowBombBypass.mc.field_71439_g.func_184597_cx();
+        if (BowBombBypass.mc.player.inventory.getCurrentItem().getItem() instanceof ItemBow && BowBombBypass.mc.player.isHandActive() && BowBombBypass.mc.player.getItemInUseMaxCount() >= 3) {
+            BowBombBypass.mc.player.connection.sendPacket((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, BowBombBypass.mc.player.getHorizontalFacing()));
+            BowBombBypass.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(BowBombBypass.mc.player.getActiveHand()));
+            BowBombBypass.mc.player.stopActiveHand();
         }
     }
 }

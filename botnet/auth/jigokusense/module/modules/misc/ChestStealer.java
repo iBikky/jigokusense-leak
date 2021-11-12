@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -23,21 +25,21 @@ extends Module {
 
     @Override
     public void update() {
-        if (ChestStealer.mc.field_71439_g.field_71070_bA instanceof ContainerChest) {
-            ContainerChest chest = (ContainerChest)ChestStealer.mc.field_71439_g.field_71070_bA;
-            for (int items = 0; items < chest.func_85151_d().func_70302_i_(); ++items) {
-                ItemStack stack = chest.func_85151_d().func_70301_a(items);
-                ChestStealer.mc.field_71442_b.func_187098_a(chest.field_75152_c, items, 0, ClickType.QUICK_MOVE, (EntityPlayer)ChestStealer.mc.field_71439_g);
+        if (ChestStealer.mc.player.openContainer instanceof ContainerChest) {
+            ContainerChest chest = (ContainerChest)ChestStealer.mc.player.openContainer;
+            for (int items = 0; items < chest.getLowerChestInventory().getSizeInventory(); ++items) {
+                ItemStack stack = chest.getLowerChestInventory().getStackInSlot(items);
+                ChestStealer.mc.playerController.windowClick(chest.windowId, items, 0, ClickType.QUICK_MOVE, (EntityPlayer)ChestStealer.mc.player);
                 if (!this.isChestEmpty(chest)) continue;
-                ChestStealer.mc.field_71439_g.func_71053_j();
+                ChestStealer.mc.player.closeScreen();
             }
         }
     }
 
     private boolean isChestEmpty(ContainerChest chest) {
         int items = 0;
-        if (items < chest.func_85151_d().func_70302_i_()) {
-            ItemStack slot = chest.func_85151_d().func_70301_a(items);
+        if (items < chest.getLowerChestInventory().getSizeInventory()) {
+            ItemStack slot = chest.getLowerChestInventory().getStackInSlot(items);
             return false;
         }
         return true;

@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -15,12 +17,12 @@ extends Cancellable {
     private float partialTicks;
 
     public Event() {
-        this.partialTicks = Minecraft.func_71410_x().func_184121_ak();
+        this.partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
     }
 
     public Event(Era era) {
         this.era = era;
-        this.partialTicks = Minecraft.func_71410_x().func_184121_ak();
+        this.partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
     }
 
     public Era getEra() {

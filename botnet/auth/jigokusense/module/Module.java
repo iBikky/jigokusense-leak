@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -20,7 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
 public class Module {
-    public static final Minecraft mc = Minecraft.func_71410_x();
+    public static final Minecraft mc = Minecraft.getMinecraft();
     public String name;
     public String description;
     public int key;
@@ -143,7 +145,7 @@ public class Module {
     }
 
     public boolean nullCheck() {
-        return Module.mc.field_71439_g == null || Module.mc.field_71441_e == null;
+        return Module.mc.player == null || Module.mc.world == null;
     }
 
     public static enum Category {

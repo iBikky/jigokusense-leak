@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -24,13 +26,13 @@ public class MCF
 extends Module {
     @EventHandler
     private final Listener<InputEvent.MouseInputEvent> listener = new Listener<InputEvent.MouseInputEvent>(event -> {
-        if (MCF.mc.field_71476_x.field_72313_a.equals((Object)RayTraceResult.Type.ENTITY) && MCF.mc.field_71476_x.field_72308_g instanceof EntityPlayer && Mouse.isButtonDown((int)2)) {
-            if (FriendsManager.isFriend(MCF.mc.field_71476_x.field_72308_g.func_70005_c_())) {
-                FriendsManager.removeFriend(MCF.mc.field_71476_x.field_72308_g.func_70005_c_());
-                Messages.sendClientMessage("removed friend: " + MCF.mc.field_71476_x.field_72308_g.func_70005_c_());
+        if (MCF.mc.objectMouseOver.typeOfHit.equals((Object)RayTraceResult.Type.ENTITY) && MCF.mc.objectMouseOver.entityHit instanceof EntityPlayer && Mouse.isButtonDown((int)2)) {
+            if (FriendsManager.isFriend(MCF.mc.objectMouseOver.entityHit.getName())) {
+                FriendsManager.removeFriend(MCF.mc.objectMouseOver.entityHit.getName());
+                Messages.sendClientMessage("removed friend: " + MCF.mc.objectMouseOver.entityHit.getName());
             } else {
-                FriendsManager.addFriend(MCF.mc.field_71476_x.field_72308_g.func_70005_c_());
-                Messages.sendSilentMessage("added friend: " + MCF.mc.field_71476_x.field_72308_g.func_70005_c_());
+                FriendsManager.addFriend(MCF.mc.objectMouseOver.entityHit.getName());
+                Messages.sendSilentMessage("added friend: " + MCF.mc.objectMouseOver.entityHit.getName());
             }
         }
     }, new Predicate[0]);

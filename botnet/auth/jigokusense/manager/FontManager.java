@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -12,7 +14,7 @@ import net.minecraft.client.Minecraft;
 
 public class FontManager {
     private final CFontRenderer cFontRenderer = new CFontRenderer(new Font("Lato", 0, 18), true, true);
-    private final Minecraft mc = Minecraft.func_71410_x();
+    private final Minecraft mc = Minecraft.getMinecraft();
     private boolean customFont = true;
 
     public void setCustomFont(boolean customFont) {
@@ -24,14 +26,14 @@ public class FontManager {
             this.cFontRenderer.drawStringWithShadow(text, x, y, color);
             return;
         }
-        this.mc.field_71466_p.func_175063_a(text, x, y, color);
+        this.mc.fontRenderer.drawStringWithShadow(text, x, y, color);
     }
 
     public int getStringWidth(String text) {
         if (this.customFont) {
             return this.cFontRenderer.getStringWidth(text);
         }
-        return this.mc.field_71466_p.func_78256_a(text);
+        return this.mc.fontRenderer.getStringWidth(text);
     }
 }
 

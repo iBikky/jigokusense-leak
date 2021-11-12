@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -68,12 +70,12 @@ extends CFont {
         y = (y - 3.0) * 2.0;
         int size = text.length();
         GL11.glPushMatrix();
-        GlStateManager.func_179139_a((double)0.5, (double)0.5, (double)0.5);
-        GlStateManager.func_179147_l();
-        GlStateManager.func_179112_b((int)770, (int)771);
-        GlStateManager.func_179131_c((float)((float)(color >> 16 & 0xFF) / 255.0f), (float)((float)(color >> 8 & 0xFF) / 255.0f), (float)((float)(color & 0xFF) / 255.0f), (float)alpha);
-        GlStateManager.func_179098_w();
-        GlStateManager.func_179144_i((int)this.tex.func_110552_b());
+        GlStateManager.scale((double)0.5, (double)0.5, (double)0.5);
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc((int)770, (int)771);
+        GlStateManager.color((float)((float)(color >> 16 & 0xFF) / 255.0f), (float)((float)(color >> 8 & 0xFF) / 255.0f), (float)((float)(color & 0xFF) / 255.0f), (float)alpha);
+        GlStateManager.enableTexture2D();
+        GlStateManager.bindTexture((int)this.tex.getGlTextureId());
         GL11.glEnable((int)2848);
         GL11.glHint((int)3155, (int)4354);
         GL11.glBegin((int)4);
@@ -90,9 +92,9 @@ extends CFont {
                         colorIndex += 16;
                     }
                     int colorCode = this.colorCode[colorIndex];
-                    GlStateManager.func_179131_c((float)((float)(colorCode >> 16 & 0xFF) / 255.0f), (float)((float)(colorCode >> 8 & 0xFF) / 255.0f), (float)((float)(colorCode & 0xFF) / 255.0f), (float)alpha);
+                    GlStateManager.color((float)((float)(colorCode >> 16 & 0xFF) / 255.0f), (float)((float)(colorCode >> 8 & 0xFF) / 255.0f), (float)((float)(colorCode & 0xFF) / 255.0f), (float)alpha);
                 } else if (colorIndex == 21) {
-                    GlStateManager.func_179131_c((float)((float)(color >> 16 & 0xFF) / 255.0f), (float)((float)(color >> 8 & 0xFF) / 255.0f), (float)((float)(color & 0xFF) / 255.0f), (float)alpha);
+                    GlStateManager.color((float)((float)(color >> 16 & 0xFF) / 255.0f), (float)((float)(color >> 8 & 0xFF) / 255.0f), (float)((float)(color & 0xFF) / 255.0f), (float)alpha);
                     currentData = this.charData;
                 }
                 ++i;

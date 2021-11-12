@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -18,7 +20,7 @@ extends Module {
 
     @Override
     public void onEnable() {
-        mc.func_147108_a((GuiScreen)JigokuSense.instance.clickGui);
+        mc.displayGuiScreen((GuiScreen)JigokuSense.instance.clickGui);
         this.toggle();
     }
 }

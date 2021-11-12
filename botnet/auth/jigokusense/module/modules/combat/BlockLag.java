@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -14,8 +16,8 @@ extends Module {
 
     @Override
     public void onEnable() {
-        Wrapper.getPlayer().func_70664_aZ();
-        Wrapper.getPlayer().field_70181_x -= 1.0;
+        Wrapper.getPlayer().jump();
+        Wrapper.getPlayer().motionY -= 1.0;
     }
 }
 

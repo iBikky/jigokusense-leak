@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -27,8 +29,8 @@ extends Module {
     @Override
     public void update() {
         try {
-            if (EntitySpeed.mc.field_71439_g.func_184187_bx() != null) {
-                Entity theEntity = EntitySpeed.mc.field_71439_g.func_184187_bx();
+            if (EntitySpeed.mc.player.getRidingEntity() != null) {
+                Entity theEntity = EntitySpeed.mc.player.getRidingEntity();
                 EntitySpeed.speedEntity(theEntity, this.speed.getValue());
             }
         }
@@ -39,16 +41,16 @@ extends Module {
 
     private static void speedEntity(Entity entity, Double speed) {
         if (entity instanceof EntityLlama) {
-            entity.field_70177_z = EntitySpeed.mc.field_71439_g.field_70177_z;
-            ((EntityLlama)entity).field_70759_as = EntitySpeed.mc.field_71439_g.field_70759_as;
+            entity.rotationYaw = EntitySpeed.mc.player.rotationYaw;
+            ((EntityLlama)entity).rotationYawHead = EntitySpeed.mc.player.rotationYawHead;
         }
-        MovementInput movementInput = EntitySpeed.mc.field_71439_g.field_71158_b;
-        double forward = movementInput.field_192832_b;
-        double strafe = movementInput.field_78902_a;
-        float yaw = EntitySpeed.mc.field_71439_g.field_70177_z;
+        MovementInput movementInput = EntitySpeed.mc.player.movementInput;
+        double forward = movementInput.moveForward;
+        double strafe = movementInput.moveStrafe;
+        float yaw = EntitySpeed.mc.player.rotationYaw;
         if (forward == 0.0 && strafe == 0.0) {
-            entity.field_70159_w = 0.0;
-            entity.field_70179_y = 0.0;
+            entity.motionX = 0.0;
+            entity.motionZ = 0.0;
         } else {
             if (forward != 0.0) {
                 if (strafe > 0.0) {
@@ -63,11 +65,11 @@ extends Module {
                     forward = -1.0;
                 }
             }
-            entity.field_70159_w = forward * speed * Math.cos(Math.toRadians(yaw + 90.0f)) + strafe * speed * Math.sin(Math.toRadians(yaw + 90.0f));
-            entity.field_70179_y = forward * speed * Math.sin(Math.toRadians(yaw + 90.0f)) - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0f));
+            entity.motionX = forward * speed * Math.cos(Math.toRadians(yaw + 90.0f)) + strafe * speed * Math.sin(Math.toRadians(yaw + 90.0f));
+            entity.motionZ = forward * speed * Math.sin(Math.toRadians(yaw + 90.0f)) - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0f));
             if (entity instanceof EntityMinecart) {
                 EntityMinecart em = (EntityMinecart)entity;
-                em.func_70016_h(forward * speed * Math.cos(Math.toRadians(yaw + 90.0f)) + strafe * speed * Math.sin(Math.toRadians(yaw + 90.0f)), em.field_70181_x, forward * speed * Math.sin(Math.toRadians(yaw + 90.0f)) - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0f)));
+                em.setVelocity(forward * speed * Math.cos(Math.toRadians(yaw + 90.0f)) + strafe * speed * Math.sin(Math.toRadians(yaw + 90.0f)), em.motionY, forward * speed * Math.sin(Math.toRadians(yaw + 90.0f)) - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0f)));
             }
         }
     }

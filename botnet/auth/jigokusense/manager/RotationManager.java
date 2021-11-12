@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -27,8 +29,8 @@ implements Global {
         if (event.getPacket() instanceof CPacketPlayer) {
             CPacketPlayer packet = (CPacketPlayer)event.getPacket();
             if (this.shouldRotate) {
-                packet.field_149476_e = this.yaw;
-                packet.field_149473_f = this.pitch;
+                packet.yaw = this.yaw;
+                packet.pitch = this.pitch;
             }
         }
     }, new Predicate[0]);
@@ -39,27 +41,27 @@ implements Global {
 
     public void reset() {
         this.shouldRotate = false;
-        if (RotationManager.mc.field_71439_g == null) {
+        if (RotationManager.mc.player == null) {
             return;
         }
-        this.yaw = RotationManager.mc.field_71439_g.field_70177_z;
-        this.pitch = RotationManager.mc.field_71439_g.field_70125_A;
+        this.yaw = RotationManager.mc.player.rotationYaw;
+        this.pitch = RotationManager.mc.player.rotationPitch;
     }
 
     public void rotate(double x, double y, double z) {
-        if (RotationManager.mc.field_71439_g == null) {
+        if (RotationManager.mc.player == null) {
             return;
         }
-        Double[] v = this.calculateLookAt(x, y, z, (EntityPlayer)RotationManager.mc.field_71439_g);
+        Double[] v = this.calculateLookAt(x, y, z, (EntityPlayer)RotationManager.mc.player);
         this.shouldRotate = true;
         this.yaw = v[0].floatValue();
         this.pitch = v[1].floatValue();
     }
 
     private Double[] calculateLookAt(double px, double py, double pz, EntityPlayer me) {
-        double dirx = me.field_70165_t - px;
-        double diry = me.field_70163_u - py;
-        double dirz = me.field_70161_v - pz;
+        double dirx = me.posX - px;
+        double diry = me.posY - py;
+        double dirz = me.posZ - pz;
         double len = Math.sqrt(dirx * dirx + diry * diry + dirz * dirz);
         double pitch = Math.asin(diry /= len);
         double yaw = Math.atan2(dirz /= len, dirx /= len);

@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -23,13 +25,13 @@ extends Module {
 
     @Override
     public void onDisable() {
-        if (Speed.mc.field_71441_e != null) {
-            Speed.mc.field_71439_g.func_70031_b(false);
+        if (Speed.mc.world != null) {
+            Speed.mc.player.setSprinting(false);
         }
-        if (this.mode.getValue().equals("AutoSpeed") && (Speed.mc.field_71474_y.field_74351_w.func_151470_d() || Speed.mc.field_71474_y.field_74368_y.func_151470_d() || Speed.mc.field_71474_y.field_74370_x.func_151470_d() || Speed.mc.field_71474_y.field_74366_z.func_151470_d()) && !Speed.mc.field_71439_g.func_70093_af() && !Speed.mc.field_71439_g.field_70123_F && !((float)Speed.mc.field_71439_g.func_71024_bL().func_75116_a() <= 6.0f)) {
-            Speed.mc.field_71439_g.func_70031_b(true);
+        if (this.mode.getValue().equals("AutoSpeed") && (Speed.mc.gameSettings.keyBindForward.isKeyDown() || Speed.mc.gameSettings.keyBindBack.isKeyDown() || Speed.mc.gameSettings.keyBindLeft.isKeyDown() || Speed.mc.gameSettings.keyBindRight.isKeyDown()) && !Speed.mc.player.isSneaking() && !Speed.mc.player.collidedHorizontally && !((float)Speed.mc.player.getFoodStats().getFoodLevel() <= 6.0f)) {
+            Speed.mc.player.setSprinting(true);
         }
-        KeyBinding.func_74510_a((int)Speed.mc.field_71474_y.field_151444_V.func_151463_i(), (boolean)true);
+        KeyBinding.setKeyBindState((int)Speed.mc.gameSettings.keyBindSprint.getKeyCode(), (boolean)true);
     }
 }
 

@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -22,30 +24,30 @@ extends Module {
 
     @Override
     public void onDisable() {
-        if (GUIBlur.mc.field_71441_e != null) {
-            GUIBlur.mc.field_71460_t.func_147706_e().func_148021_a();
+        if (GUIBlur.mc.world != null) {
+            GUIBlur.mc.entityRenderer.getShaderGroup().deleteShaderGroup();
         }
     }
 
     @Override
     public void update() {
-        if (GUIBlur.mc.field_71441_e != null) {
-            if (GUIBlur.mc.field_71462_r == JigokuSense.instance.clickGui) {
-                if (OpenGlHelper.field_148824_g && mc.func_175606_aa() instanceof EntityPlayer) {
-                    if (GUIBlur.mc.field_71460_t.func_147706_e() != null) {
-                        GUIBlur.mc.field_71460_t.func_147706_e().func_148021_a();
+        if (GUIBlur.mc.world != null) {
+            if (GUIBlur.mc.currentScreen == JigokuSense.instance.clickGui) {
+                if (OpenGlHelper.shadersSupported && mc.getRenderViewEntity() instanceof EntityPlayer) {
+                    if (GUIBlur.mc.entityRenderer.getShaderGroup() != null) {
+                        GUIBlur.mc.entityRenderer.getShaderGroup().deleteShaderGroup();
                     }
                     try {
-                        GUIBlur.mc.field_71460_t.func_175069_a(new ResourceLocation("shaders/post/blur.json"));
+                        GUIBlur.mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
                     }
                     catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else if (GUIBlur.mc.field_71460_t.func_147706_e() != null && GUIBlur.mc.field_71462_r == null) {
-                    GUIBlur.mc.field_71460_t.func_147706_e().func_148021_a();
+                } else if (GUIBlur.mc.entityRenderer.getShaderGroup() != null && GUIBlur.mc.currentScreen == null) {
+                    GUIBlur.mc.entityRenderer.getShaderGroup().deleteShaderGroup();
                 }
-            } else if (GUIBlur.mc.field_71460_t.func_147706_e() != null) {
-                GUIBlur.mc.field_71460_t.func_147706_e().func_148021_a();
+            } else if (GUIBlur.mc.entityRenderer.getShaderGroup() != null) {
+                GUIBlur.mc.entityRenderer.getShaderGroup().deleteShaderGroup();
             }
         }
     }

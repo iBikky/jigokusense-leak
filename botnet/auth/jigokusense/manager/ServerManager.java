@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -12,7 +14,7 @@ import java.util.Objects;
 import net.minecraft.client.Minecraft;
 
 public class ServerManager {
-    public static final Minecraft mc = Minecraft.func_71410_x();
+    public static final Minecraft mc = Minecraft.getMinecraft();
     private final float[] tpsCounts = new float[10];
     private final DecimalFormat format = new DecimalFormat("##.00#");
     private final Timer timer = new Timer();
@@ -76,11 +78,11 @@ public class ServerManager {
     }
 
     public int getPing() {
-        if (ServerManager.mc.field_71439_g == null || ServerManager.mc.field_71441_e == null) {
+        if (ServerManager.mc.player == null || ServerManager.mc.world == null) {
             return 0;
         }
         try {
-            return Objects.requireNonNull(mc.func_147114_u()).func_175102_a(mc.func_147114_u().func_175105_e().getId()).func_178853_c();
+            return Objects.requireNonNull(mc.getConnection()).getPlayerInfo(mc.getConnection().getGameProfile().getId()).getResponseTime();
         }
         catch (Exception e) {
             return 0;

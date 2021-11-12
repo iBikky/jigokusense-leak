@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -44,17 +46,17 @@ extends Module {
     }
 
     private void throwPearl() {
-        int oldslot = MCP.mc.field_71439_g.field_71071_by.field_70461_c;
+        int oldslot = MCP.mc.player.inventory.currentItem;
         for (int i = 0; i < 9; ++i) {
-            ItemStack Stack = MCP.mc.field_71439_g.field_71071_by.func_70301_a(i);
-            if (MCP.mc.field_71439_g.field_71071_by.func_70301_a(i).func_190926_b() || !(Stack.func_77973_b() instanceof ItemEnderPearl)) continue;
-            MCP.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketHeldItemChange(i));
-            MCP.mc.field_71442_b.func_78765_e();
+            ItemStack Stack = MCP.mc.player.inventory.getStackInSlot(i);
+            if (MCP.mc.player.inventory.getStackInSlot(i).isEmpty() || !(Stack.getItem() instanceof ItemEnderPearl)) continue;
+            MCP.mc.player.connection.sendPacket((Packet)new CPacketHeldItemChange(i));
+            MCP.mc.playerController.updateController();
             break;
         }
-        MCP.mc.field_71442_b.func_187101_a((EntityPlayer)MCP.mc.field_71439_g, (World)MCP.mc.field_71441_e, EnumHand.MAIN_HAND);
-        MCP.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketHeldItemChange(oldslot));
-        MCP.mc.field_71442_b.func_78765_e();
+        MCP.mc.playerController.processRightClick((EntityPlayer)MCP.mc.player, (World)MCP.mc.world, EnumHand.MAIN_HAND);
+        MCP.mc.player.connection.sendPacket((Packet)new CPacketHeldItemChange(oldslot));
+        MCP.mc.playerController.updateController();
     }
 }
 

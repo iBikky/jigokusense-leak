@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -14,16 +16,16 @@ import net.minecraft.network.play.client.CPacketPlayer;
 public class PositionManager
 implements Global {
     public void updatePosition() {
-        double x = PositionManager.mc.field_71439_g.field_70165_t;
-        double y = PositionManager.mc.field_71439_g.field_70163_u;
-        double z = PositionManager.mc.field_71439_g.field_70161_v;
-        boolean onground = PositionManager.mc.field_71439_g.field_70122_E;
+        double x = PositionManager.mc.player.posX;
+        double y = PositionManager.mc.player.posY;
+        double z = PositionManager.mc.player.posZ;
+        boolean onground = PositionManager.mc.player.onGround;
     }
 
     public void setPositionPacket(double x, double y, double z, boolean onGround, boolean setPos, boolean noLagBack) {
-        PositionManager.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayer.Position(x, y, z, onGround));
+        PositionManager.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(x, y, z, onGround));
         if (setPos) {
-            PositionManager.mc.field_71439_g.func_70107_b(x, y, z);
+            PositionManager.mc.player.setPosition(x, y, z);
             if (noLagBack) {
                 this.updatePosition();
             }

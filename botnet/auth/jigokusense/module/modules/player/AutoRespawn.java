@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -22,12 +24,12 @@ extends Module {
     @Override
     public void update() {
         super.update();
-        if (AutoRespawn.mc.field_71462_r instanceof GuiGameOver) {
-            AutoRespawn.mc.field_71439_g.func_71004_bE();
-            mc.func_147108_a(null);
+        if (AutoRespawn.mc.currentScreen instanceof GuiGameOver) {
+            AutoRespawn.mc.player.respawnPlayer();
+            mc.displayGuiScreen(null);
         }
-        if (this.coords.getValue() && AutoRespawn.mc.field_71462_r instanceof GuiGameOver) {
-            Messages.sendClientMessage("You have died at x" + (int)AutoRespawn.mc.field_71439_g.field_70165_t + " y" + (int)AutoRespawn.mc.field_71439_g.field_70163_u + " z" + (int)AutoRespawn.mc.field_71439_g.field_70161_v);
+        if (this.coords.getValue() && AutoRespawn.mc.currentScreen instanceof GuiGameOver) {
+            Messages.sendClientMessage("You have died at x" + (int)AutoRespawn.mc.player.posX + " y" + (int)AutoRespawn.mc.player.posY + " z" + (int)AutoRespawn.mc.player.posZ);
         }
     }
 }

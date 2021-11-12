@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -24,10 +26,10 @@ extends Module {
 
     @Override
     public void onEnable() {
-        if (Vanish.mc.field_71439_g.func_184187_bx() != null) {
-            this.entity = Vanish.mc.field_71439_g.func_184187_bx();
-            Vanish.mc.field_71439_g.func_184210_p();
-            Vanish.mc.field_71441_e.func_72900_e(this.entity);
+        if (Vanish.mc.player.getRidingEntity() != null) {
+            this.entity = Vanish.mc.player.getRidingEntity();
+            Vanish.mc.player.dismountRidingEntity();
+            Vanish.mc.world.removeEntity(this.entity);
         }
     }
 
@@ -39,10 +41,10 @@ extends Module {
         }
         if (this.entity != null) {
             try {
-                this.entity.field_70165_t = Vanish.mc.field_71439_g.field_70165_t;
-                this.entity.field_70163_u = Vanish.mc.field_71439_g.field_70163_u;
-                this.entity.field_70161_v = Vanish.mc.field_71439_g.field_70161_v;
-                Objects.requireNonNull(mc.func_147114_u()).func_147297_a((Packet)new CPacketVehicleMove(this.entity));
+                this.entity.posX = Vanish.mc.player.posX;
+                this.entity.posY = Vanish.mc.player.posY;
+                this.entity.posZ = Vanish.mc.player.posZ;
+                Objects.requireNonNull(mc.getConnection()).sendPacket((Packet)new CPacketVehicleMove(this.entity));
             }
             catch (Exception exception) {
                 // empty catch block

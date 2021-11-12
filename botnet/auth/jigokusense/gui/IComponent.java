@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -30,13 +32,13 @@ public interface IComponent {
     public void setRect(Rectangle var1);
 
     public static void fillRect(Rectangle rect, Color color) {
-        Gui.func_73734_a((int)rect.x, (int)rect.y, (int)(rect.x + rect.width), (int)(rect.y + rect.height), (int)color.getRGB());
+        Gui.drawRect((int)rect.x, (int)rect.y, (int)(rect.x + rect.width), (int)(rect.y + rect.height), (int)color.getRGB());
     }
 
     public static void drawString(String text, Point pos, Color color) {
-        GlStateManager.func_179098_w();
+        GlStateManager.enableTexture2D();
         JigokuSense.fontManager.drawStringWithShadow(text, pos.x, pos.y, color.getRGB());
-        GlStateManager.func_179090_x();
+        GlStateManager.disableTexture2D();
     }
 }
 

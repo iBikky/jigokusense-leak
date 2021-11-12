@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -22,11 +24,11 @@ extends Module {
 
     @Override
     public void update() {
-        if (this.levitation.getValue() && EffectRemover.mc.field_71439_g.func_70644_a(Objects.requireNonNull(Potion.func_180142_b((String)"levitation")))) {
-            EffectRemover.mc.field_71439_g.func_184596_c(Potion.func_180142_b((String)"levitation"));
+        if (this.levitation.getValue() && EffectRemover.mc.player.isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation((String)"levitation")))) {
+            EffectRemover.mc.player.removeActivePotionEffect(Potion.getPotionFromResourceLocation((String)"levitation"));
         }
-        if (this.jumpBoost.getValue() && EffectRemover.mc.field_71439_g.func_70644_a(Objects.requireNonNull(Potion.func_180142_b((String)"jump_boost")))) {
-            EffectRemover.mc.field_71439_g.func_184596_c(Potion.func_180142_b((String)"jump_boost"));
+        if (this.jumpBoost.getValue() && EffectRemover.mc.player.isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation((String)"jump_boost")))) {
+            EffectRemover.mc.player.removeActivePotionEffect(Potion.getPotionFromResourceLocation((String)"jump_boost"));
         }
     }
 }

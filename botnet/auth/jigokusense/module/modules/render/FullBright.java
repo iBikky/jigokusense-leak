@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -13,12 +15,12 @@ extends Module {
 
     @Override
     public void update() {
-        FullBright.mc.field_71474_y.field_74333_Y = 100.0f;
+        FullBright.mc.gameSettings.gammaSetting = 100.0f;
     }
 
     @Override
     public void onDisable() {
-        FullBright.mc.field_71474_y.field_74333_Y = 1.0f;
+        FullBright.mc.gameSettings.gammaSetting = 1.0f;
     }
 }
 

@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -24,20 +26,20 @@ extends Module {
 
     @Override
     public void onDisable() {
-        if (Sprint.mc.field_71441_e != null) {
-            Sprint.mc.field_71439_g.func_70031_b(false);
+        if (Sprint.mc.world != null) {
+            Sprint.mc.player.setSprinting(false);
         }
     }
 
     @Override
     public void update() {
-        if (this.mode.getValue().equals("Legit") && Sprint.mc.field_71474_y.field_74351_w.func_151470_d() && !Sprint.mc.field_71439_g.func_70093_af() && !Sprint.mc.field_71439_g.func_184587_cr() && !Sprint.mc.field_71439_g.field_70123_F && Sprint.mc.field_71462_r == null && !((float)Sprint.mc.field_71439_g.func_71024_bL().func_75116_a() <= 6.0f)) {
-            Sprint.mc.field_71439_g.func_70031_b(true);
+        if (this.mode.getValue().equals("Legit") && Sprint.mc.gameSettings.keyBindForward.isKeyDown() && !Sprint.mc.player.isSneaking() && !Sprint.mc.player.isHandActive() && !Sprint.mc.player.collidedHorizontally && Sprint.mc.currentScreen == null && !((float)Sprint.mc.player.getFoodStats().getFoodLevel() <= 6.0f)) {
+            Sprint.mc.player.setSprinting(true);
         }
-        if (this.mode.getValue().equals("Rage") && (Sprint.mc.field_71474_y.field_74351_w.func_151470_d() || Sprint.mc.field_71474_y.field_74368_y.func_151470_d() || Sprint.mc.field_71474_y.field_74370_x.func_151470_d() || Sprint.mc.field_71474_y.field_74366_z.func_151470_d()) && !Sprint.mc.field_71439_g.func_70093_af() && !Sprint.mc.field_71439_g.field_70123_F && !((float)Sprint.mc.field_71439_g.func_71024_bL().func_75116_a() <= 6.0f)) {
-            Sprint.mc.field_71439_g.func_70031_b(true);
+        if (this.mode.getValue().equals("Rage") && (Sprint.mc.gameSettings.keyBindForward.isKeyDown() || Sprint.mc.gameSettings.keyBindBack.isKeyDown() || Sprint.mc.gameSettings.keyBindLeft.isKeyDown() || Sprint.mc.gameSettings.keyBindRight.isKeyDown()) && !Sprint.mc.player.isSneaking() && !Sprint.mc.player.collidedHorizontally && !((float)Sprint.mc.player.getFoodStats().getFoodLevel() <= 6.0f)) {
+            Sprint.mc.player.setSprinting(true);
         }
-        KeyBinding.func_74510_a((int)Sprint.mc.field_71474_y.field_151444_V.func_151463_i(), (boolean)true);
+        KeyBinding.setKeyBindState((int)Sprint.mc.gameSettings.keyBindSprint.getKeyCode(), (boolean)true);
     }
 }
 

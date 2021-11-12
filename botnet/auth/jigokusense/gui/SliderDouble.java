@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -32,7 +34,7 @@ extends AbstractComponent {
         IComponent.fillRect(new Rectangle(this.rect.x, this.rect.y, (int)((double)this.rect.width * Multiplier), this.rect.height), new Color(42, 28, 50, 200));
         IComponent.drawString(this.setting.getName() + ": " + this.setting.getValue(), new Point(this.rect.x + 1, this.rect.y + 2), Color.WHITE);
         if (this.sliding) {
-            double diff = MathHelper.func_151237_a((double)((Screen.MOUSE.getX() - this.rect.getX()) / (this.rect.getWidth() - 1.0)), (double)0.0, (double)1.0);
+            double diff = MathHelper.clamp((double)((Screen.MOUSE.getX() - this.rect.getX()) / (this.rect.getWidth() - 1.0)), (double)0.0, (double)1.0);
             this.setting.setValue((int)((this.setting.getMax() - this.setting.getMin()) * diff + this.setting.getMin()));
         }
     }

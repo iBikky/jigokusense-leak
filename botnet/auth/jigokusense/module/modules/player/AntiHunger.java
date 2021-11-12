@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -20,10 +22,10 @@ extends Module {
         if (event.getPacket() instanceof CPacketPlayer) {
             boolean groundCheck;
             CPacketPlayer player = (CPacketPlayer)event.getPacket();
-            double differenceY = AntiHunger.mc.field_71439_g.field_70163_u - AntiHunger.mc.field_71439_g.field_70137_T;
+            double differenceY = AntiHunger.mc.player.posY - AntiHunger.mc.player.lastTickPosY;
             boolean bl = groundCheck = differenceY == 0.0;
-            if (groundCheck && !AntiHunger.mc.field_71442_b.field_78778_j) {
-                AntiHunger.mc.field_71439_g.field_70122_E = true;
+            if (groundCheck && !AntiHunger.mc.playerController.isHittingBlock) {
+                AntiHunger.mc.player.onGround = true;
             }
         }
     }, new Predicate[0]);

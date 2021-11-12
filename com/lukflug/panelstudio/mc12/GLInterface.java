@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -41,10 +43,10 @@ import org.lwjgl.util.glu.GLU;
 
 public abstract class GLInterface
 implements Interface {
-    private static final FloatBuffer MODELVIEW = GLAllocation.func_74529_h((int)16);
-    private static final FloatBuffer PROJECTION = GLAllocation.func_74529_h((int)16);
-    private static final IntBuffer VIEWPORT = GLAllocation.func_74527_f((int)16);
-    private static final FloatBuffer COORDS = GLAllocation.func_74529_h((int)3);
+    private static final FloatBuffer MODELVIEW = GLAllocation.createDirectFloatBuffer((int)16);
+    private static final FloatBuffer PROJECTION = GLAllocation.createDirectFloatBuffer((int)16);
+    private static final IntBuffer VIEWPORT = GLAllocation.createDirectIntBuffer((int)16);
+    private static final FloatBuffer COORDS = GLAllocation.createDirectFloatBuffer((int)3);
     private Stack<Rectangle> clipRect = new Stack();
     protected boolean clipX;
 
@@ -54,57 +56,57 @@ implements Interface {
 
     @Override
     public void fillTriangle(Point pos1, Point pos2, Point pos3, Color c1, Color c2, Color c3) {
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferbuilder = tessellator.func_178180_c();
-        bufferbuilder.func_181668_a(4, DefaultVertexFormats.field_181706_f);
-        bufferbuilder.func_181662_b((double)pos1.x, (double)pos1.y, (double)this.getZLevel()).func_181666_a((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)pos2.x, (double)pos2.y, (double)this.getZLevel()).func_181666_a((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)pos3.x, (double)pos3.y, (double)this.getZLevel()).func_181666_a((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).func_181675_d();
-        tessellator.func_78381_a();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(4, DefaultVertexFormats.POSITION_COLOR);
+        bufferbuilder.pos((double)pos1.x, (double)pos1.y, (double)this.getZLevel()).color((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)pos2.x, (double)pos2.y, (double)this.getZLevel()).color((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)pos3.x, (double)pos3.y, (double)this.getZLevel()).color((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).endVertex();
+        tessellator.draw();
     }
 
     @Override
     public void drawLine(Point a, Point b, Color c1, Color c2) {
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferbuilder = tessellator.func_178180_c();
-        bufferbuilder.func_181668_a(1, DefaultVertexFormats.field_181706_f);
-        bufferbuilder.func_181662_b((double)a.x, (double)a.y, (double)this.getZLevel()).func_181666_a((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)b.x, (double)b.y, (double)this.getZLevel()).func_181666_a((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).func_181675_d();
-        tessellator.func_78381_a();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(1, DefaultVertexFormats.POSITION_COLOR);
+        bufferbuilder.pos((double)a.x, (double)a.y, (double)this.getZLevel()).color((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)b.x, (double)b.y, (double)this.getZLevel()).color((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).endVertex();
+        tessellator.draw();
     }
 
     @Override
     public void fillRect(Rectangle r, Color c1, Color c2, Color c3, Color c4) {
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferbuilder = tessellator.func_178180_c();
-        bufferbuilder.func_181668_a(7, DefaultVertexFormats.field_181706_f);
-        bufferbuilder.func_181662_b((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).func_181666_a((float)c4.getRed() / 255.0f, (float)c4.getGreen() / 255.0f, (float)c4.getBlue() / 255.0f, (float)c4.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).func_181666_a((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).func_181666_a((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)r.x, (double)r.y, (double)this.getZLevel()).func_181666_a((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).func_181675_d();
-        tessellator.func_78381_a();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        bufferbuilder.pos((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).color((float)c4.getRed() / 255.0f, (float)c4.getGreen() / 255.0f, (float)c4.getBlue() / 255.0f, (float)c4.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).color((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).color((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)r.x, (double)r.y, (double)this.getZLevel()).color((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).endVertex();
+        tessellator.draw();
     }
 
     @Override
     public void drawRect(Rectangle r, Color c1, Color c2, Color c3, Color c4) {
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferbuilder = tessellator.func_178180_c();
-        bufferbuilder.func_181668_a(2, DefaultVertexFormats.field_181706_f);
-        bufferbuilder.func_181662_b((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).func_181666_a((float)c4.getRed() / 255.0f, (float)c4.getGreen() / 255.0f, (float)c4.getBlue() / 255.0f, (float)c4.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).func_181666_a((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).func_181666_a((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).func_181675_d();
-        bufferbuilder.func_181662_b((double)r.x, (double)r.y, (double)this.getZLevel()).func_181666_a((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).func_181675_d();
-        tessellator.func_78381_a();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(2, DefaultVertexFormats.POSITION_COLOR);
+        bufferbuilder.pos((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).color((float)c4.getRed() / 255.0f, (float)c4.getGreen() / 255.0f, (float)c4.getBlue() / 255.0f, (float)c4.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).color((float)c3.getRed() / 255.0f, (float)c3.getGreen() / 255.0f, (float)c3.getBlue() / 255.0f, (float)c3.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).color((float)c2.getRed() / 255.0f, (float)c2.getGreen() / 255.0f, (float)c2.getBlue() / 255.0f, (float)c2.getAlpha() / 255.0f).endVertex();
+        bufferbuilder.pos((double)r.x, (double)r.y, (double)this.getZLevel()).color((float)c1.getRed() / 255.0f, (float)c1.getGreen() / 255.0f, (float)c1.getBlue() / 255.0f, (float)c1.getAlpha() / 255.0f).endVertex();
+        tessellator.draw();
     }
 
     @Override
     public synchronized int loadImage(String name) {
         try {
             ResourceLocation rl = new ResourceLocation(this.getResourcePrefix() + name);
-            InputStream stream = Minecraft.func_71410_x().func_110442_L().func_110536_a(rl).func_110527_b();
+            InputStream stream = Minecraft.getMinecraft().getResourceManager().getResource(rl).getInputStream();
             BufferedImage image = ImageIO.read(stream);
-            int texture = TextureUtil.func_110996_a();
-            TextureUtil.func_110987_a((int)texture, (BufferedImage)image);
+            int texture = TextureUtil.glGenTextures();
+            TextureUtil.uploadTextureImage((int)texture, (BufferedImage)image);
             return texture;
         }
         catch (IOException e) {
@@ -145,17 +147,17 @@ implements Interface {
             texCoords[1][0] = temp1;
             texCoords[1][1] = temp2;
         }
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferbuilder = tessellator.func_178180_c();
-        GlStateManager.func_179144_i((int)image);
-        GlStateManager.func_179098_w();
-        bufferbuilder.func_181668_a(7, DefaultVertexFormats.field_181707_g);
-        bufferbuilder.func_181662_b((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).func_187315_a((double)texCoords[0][0], (double)texCoords[0][1]).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).func_187315_a((double)texCoords[1][0], (double)texCoords[1][1]).func_181675_d();
-        bufferbuilder.func_181662_b((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).func_187315_a((double)texCoords[2][0], (double)texCoords[2][1]).func_181675_d();
-        bufferbuilder.func_181662_b((double)r.x, (double)r.y, (double)this.getZLevel()).func_187315_a((double)texCoords[3][0], (double)texCoords[3][1]).func_181675_d();
-        tessellator.func_78381_a();
-        GlStateManager.func_179090_x();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        GlStateManager.bindTexture((int)image);
+        GlStateManager.enableTexture2D();
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferbuilder.pos((double)r.x, (double)(r.y + r.height), (double)this.getZLevel()).tex((double)texCoords[0][0], (double)texCoords[0][1]).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)(r.y + r.height), (double)this.getZLevel()).tex((double)texCoords[1][0], (double)texCoords[1][1]).endVertex();
+        bufferbuilder.pos((double)(r.x + r.width), (double)r.y, (double)this.getZLevel()).tex((double)texCoords[2][0], (double)texCoords[2][1]).endVertex();
+        bufferbuilder.pos((double)r.x, (double)r.y, (double)this.getZLevel()).tex((double)texCoords[3][0], (double)texCoords[3][1]).endVertex();
+        tessellator.draw();
+        GlStateManager.disableTexture2D();
     }
 
     protected void scissor(Rectangle r) {
@@ -218,23 +220,23 @@ implements Interface {
     }
 
     public void getMatrices() {
-        GlStateManager.func_179111_a((int)2982, (FloatBuffer)MODELVIEW);
-        GlStateManager.func_179111_a((int)2983, (FloatBuffer)PROJECTION);
-        GlStateManager.func_187445_a((int)2978, (IntBuffer)VIEWPORT);
+        GlStateManager.getFloat((int)2982, (FloatBuffer)MODELVIEW);
+        GlStateManager.getFloat((int)2983, (FloatBuffer)PROJECTION);
+        GlStateManager.glGetInteger((int)2978, (IntBuffer)VIEWPORT);
     }
 
     public static void begin() {
-        GlStateManager.func_179147_l();
-        GlStateManager.func_179090_x();
-        GlStateManager.func_187428_a((GlStateManager.SourceFactor)GlStateManager.SourceFactor.SRC_ALPHA, (GlStateManager.DestFactor)GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, (GlStateManager.SourceFactor)GlStateManager.SourceFactor.ONE, (GlStateManager.DestFactor)GlStateManager.DestFactor.ZERO);
-        GlStateManager.func_179103_j((int)7425);
-        GlStateManager.func_187441_d((float)2.0f);
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate((GlStateManager.SourceFactor)GlStateManager.SourceFactor.SRC_ALPHA, (GlStateManager.DestFactor)GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, (GlStateManager.SourceFactor)GlStateManager.SourceFactor.ONE, (GlStateManager.DestFactor)GlStateManager.DestFactor.ZERO);
+        GlStateManager.shadeModel((int)7425);
+        GlStateManager.glLineWidth((float)2.0f);
     }
 
     public static void end() {
-        GlStateManager.func_179103_j((int)7424);
-        GlStateManager.func_179098_w();
-        GlStateManager.func_179084_k();
+        GlStateManager.shadeModel((int)7424);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
     }
 
     protected abstract float getZLevel();

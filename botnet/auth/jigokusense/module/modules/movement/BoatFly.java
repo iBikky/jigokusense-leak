@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -13,8 +15,8 @@ extends Module {
     }
 
     public void onUpdate() {
-        if (Wrapper.mc.field_71439_g.func_184187_bx() != null && Wrapper.mc.field_71474_y.field_74314_A.func_151470_d()) {
-            Wrapper.mc.field_71439_g.func_184187_bx().field_70181_x = 0.1;
+        if (Wrapper.mc.player.getRidingEntity() != null && Wrapper.mc.gameSettings.keyBindJump.isKeyDown()) {
+            Wrapper.mc.player.getRidingEntity().motionY = 0.1;
         }
     }
 }

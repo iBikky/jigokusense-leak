@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -19,25 +21,25 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.network.Packet;
 
 public class Wrapper {
-    public static final Minecraft mc = Minecraft.func_71410_x();
+    public static final Minecraft mc = Minecraft.getMinecraft();
     public static volatile Wrapper INSTANCE = new Wrapper();
 
     @Nullable
     public static EntityPlayerSP getPlayer() {
-        return Wrapper.mc.field_71439_g;
+        return Wrapper.mc.player;
     }
 
     @Nullable
     public static WorldClient getWorld() {
-        return Wrapper.mc.field_71441_e;
+        return Wrapper.mc.world;
     }
 
     public static FontRenderer getFontRenderer() {
-        return Wrapper.mc.field_71466_p;
+        return Wrapper.mc.fontRenderer;
     }
 
     public void sendPacket(Packet packet) {
-        this.getPlayer().field_71174_a.func_147297_a(packet);
+        this.getPlayer().connection.sendPacket(packet);
     }
 }
 

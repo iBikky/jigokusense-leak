@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -37,9 +39,9 @@ extends Module {
     public void renderOverlay(RenderGameOverlayEvent event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR && this.csgowatermark.getValue()) {
             String ping = JigokuSense.serverManager.getPing() + "ms ";
-            String server = mc.func_71356_B() ? "singleplayer" : Objects.requireNonNull(Hud.mc.func_147104_D()).field_78845_b;
+            String server = mc.isSingleplayer() ? "singleplayer" : Objects.requireNonNull(Hud.mc.getCurrentServerData()).serverIP;
             String time = new SimpleDateFormat("k:mm").format(new Date());
-            String name = Hud.mc.field_71439_g.func_70005_c_();
+            String name = Hud.mc.player.getName();
             String text = " JigokuSense | " + name + " | " + time + " | " + server + " | " + ping;
             float width = JigokuSense.fontManager.getStringWidth(text) + 6;
             int height = 20;
@@ -56,7 +58,7 @@ extends Module {
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
             if (this.greeter.getValue()) {
-                JigokuSense.fontManager.drawStringWithShadow("Welcome to JigokuSense, " + Hud.mc.field_71439_g.func_70005_c_(), 250.0f, 2.0f, -51);
+                JigokuSense.fontManager.drawStringWithShadow("Welcome to JigokuSense, " + Hud.mc.player.getName(), 250.0f, 2.0f, -51);
             }
             int i = -8;
             if (this.watermark.getValue()) {
@@ -67,7 +69,7 @@ extends Module {
                 JigokuSense.fontManager.drawStringWithShadow(ping, 2.0f, i += 10, -51);
             }
             if (this.fps.getValue()) {
-                String fps = "FPS " + Minecraft.field_71470_ab;
+                String fps = "FPS " + Minecraft.debugFPS;
                 JigokuSense.fontManager.drawStringWithShadow(fps, 2.0f, i += 10, -51);
             }
         }

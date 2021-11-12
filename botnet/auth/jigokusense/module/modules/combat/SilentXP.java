@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -27,19 +29,19 @@ extends Module {
 
     @Override
     public void update() {
-        if (SilentXP.mc.field_71462_r == null) {
-            this.prvSlot = SilentXP.mc.field_71439_g.field_71071_by.field_70461_c;
-            SilentXP.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketHeldItemChange(this.findExpInHotbar()));
-            SilentXP.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
-            SilentXP.mc.field_71439_g.field_71071_by.field_70461_c = this.prvSlot;
-            SilentXP.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketHeldItemChange(this.prvSlot));
+        if (SilentXP.mc.currentScreen == null) {
+            this.prvSlot = SilentXP.mc.player.inventory.currentItem;
+            SilentXP.mc.player.connection.sendPacket((Packet)new CPacketHeldItemChange(this.findExpInHotbar()));
+            SilentXP.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
+            SilentXP.mc.player.inventory.currentItem = this.prvSlot;
+            SilentXP.mc.player.connection.sendPacket((Packet)new CPacketHeldItemChange(this.prvSlot));
         }
     }
 
     private int findExpInHotbar() {
         int slot = 0;
         for (int i = 0; i < 9; ++i) {
-            if (SilentXP.mc.field_71439_g.field_71071_by.func_70301_a(i).func_77973_b() != Items.field_151062_by) continue;
+            if (SilentXP.mc.player.inventory.getStackInSlot(i).getItem() != Items.EXPERIENCE_BOTTLE) continue;
             slot = i;
             break;
         }

@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -17,7 +19,7 @@ extends Module {
 
     @Override
     public void update() {
-        KeyBinding.func_74510_a((int)AutoWalk.mc.field_71474_y.field_74351_w.func_151463_i(), (boolean)true);
+        KeyBinding.setKeyBindState((int)AutoWalk.mc.gameSettings.keyBindForward.getKeyCode(), (boolean)true);
     }
 }
 

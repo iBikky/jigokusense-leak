@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -19,8 +21,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderUtil
 implements Global {
-    private static final BufferBuilder bufferbuilder = Tessellator.func_178181_a().func_178180_c();
-    private static final Tessellator tessellator = Tessellator.func_178181_a();
+    private static final BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
+    private static final Tessellator tessellator = Tessellator.getInstance();
 
     public static void drawRect(double left, double top, double right, double bottom, int color) {
         if (left < right) {
@@ -37,20 +39,20 @@ implements Global {
         float f = (float)(color >> 16 & 0xFF) / 255.0f;
         float f1 = (float)(color >> 8 & 0xFF) / 255.0f;
         float f2 = (float)(color & 0xFF) / 255.0f;
-        Tessellator tessellator = Tessellator.func_178181_a();
-        BufferBuilder bufferBuilder = tessellator.func_178180_c();
-        GlStateManager.func_179147_l();
-        GlStateManager.func_179090_x();
-        GlStateManager.func_179120_a((int)770, (int)771, (int)1, (int)0);
-        GlStateManager.func_179131_c((float)f, (float)f1, (float)f2, (float)f3);
-        bufferBuilder.func_181668_a(7, DefaultVertexFormats.field_181705_e);
-        bufferBuilder.func_181662_b(left, bottom, 0.0).func_181675_d();
-        bufferBuilder.func_181662_b(right, bottom, 0.0).func_181675_d();
-        bufferBuilder.func_181662_b(right, top, 0.0).func_181675_d();
-        bufferBuilder.func_181662_b(left, top, 0.0).func_181675_d();
-        tessellator.func_78381_a();
-        GlStateManager.func_179098_w();
-        GlStateManager.func_179084_k();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate((int)770, (int)771, (int)1, (int)0);
+        GlStateManager.color((float)f, (float)f1, (float)f2, (float)f3);
+        bufferBuilder.begin(7, DefaultVertexFormats.POSITION);
+        bufferBuilder.pos(left, bottom, 0.0).endVertex();
+        bufferBuilder.pos(right, bottom, 0.0).endVertex();
+        bufferBuilder.pos(right, top, 0.0).endVertex();
+        bufferBuilder.pos(left, top, 0.0).endVertex();
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
     }
 
     public static void drawBorderedRect(double left, double top, double right, double bottom, double borderWidth, int insideColor, int borderColor, boolean borderIncludedInBounds) {

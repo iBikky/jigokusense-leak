@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -28,16 +30,16 @@ extends Module {
     @Override
     public void update() {
         if (this.everything.getValue()) {
-            FastPlace.mc.field_71467_ac = 0;
+            FastPlace.mc.rightClickDelayTimer = 0;
         }
-        if (this.exp.getValue() && FastPlace.mc.field_71439_g.func_184614_ca().func_77973_b() instanceof ItemExpBottle || FastPlace.mc.field_71439_g.func_184592_cb().func_77973_b() instanceof ItemExpBottle) {
-            FastPlace.mc.field_71467_ac = 0;
+        if (this.exp.getValue() && FastPlace.mc.player.getHeldItemMainhand().getItem() instanceof ItemExpBottle || FastPlace.mc.player.getHeldItemOffhand().getItem() instanceof ItemExpBottle) {
+            FastPlace.mc.rightClickDelayTimer = 0;
         }
-        if (this.blocks.getValue() && FastPlace.mc.field_71439_g.func_184614_ca().func_77973_b() instanceof ItemBlock || FastPlace.mc.field_71439_g.func_184592_cb().func_77973_b() instanceof ItemBlock) {
-            FastPlace.mc.field_71467_ac = 0;
+        if (this.blocks.getValue() && FastPlace.mc.player.getHeldItemMainhand().getItem() instanceof ItemBlock || FastPlace.mc.player.getHeldItemOffhand().getItem() instanceof ItemBlock) {
+            FastPlace.mc.rightClickDelayTimer = 0;
         }
-        if (this.crystals.getValue() && FastPlace.mc.field_71439_g.func_184614_ca().func_77973_b() instanceof ItemEndCrystal || FastPlace.mc.field_71439_g.func_184592_cb().func_77973_b() instanceof ItemEndCrystal) {
-            FastPlace.mc.field_71467_ac = 0;
+        if (this.crystals.getValue() && FastPlace.mc.player.getHeldItemMainhand().getItem() instanceof ItemEndCrystal || FastPlace.mc.player.getHeldItemOffhand().getItem() instanceof ItemEndCrystal) {
+            FastPlace.mc.rightClickDelayTimer = 0;
         }
     }
 }

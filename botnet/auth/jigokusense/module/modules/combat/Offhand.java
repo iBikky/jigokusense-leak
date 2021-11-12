@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -35,42 +37,42 @@ extends Module {
 
     @Override
     public void update() {
-        if (Offhand.mc.field_71462_r instanceof GuiContainer && !(Offhand.mc.field_71462_r instanceof GuiInventory)) {
+        if (Offhand.mc.currentScreen instanceof GuiContainer && !(Offhand.mc.currentScreen instanceof GuiInventory)) {
             return;
         }
-        EntityPlayerSP player = Offhand.mc.field_71439_g;
+        EntityPlayerSP player = Offhand.mc.player;
         if (player == null) {
             return;
         }
-        if (!player.field_71071_by.func_70445_o().func_190926_b() && !this.dragging) {
+        if (!player.inventory.getItemStack().isEmpty() && !this.dragging) {
             for (int i = 0; i < 45; ++i) {
-                if (!player.field_71071_by.func_70301_a(i).func_190926_b() && player.field_71071_by.func_70301_a(i).func_77973_b() != Items.field_190931_a) continue;
+                if (!player.inventory.getStackInSlot(i).isEmpty() && player.inventory.getStackInSlot(i).getItem() != Items.AIR) continue;
                 int slot = i < 9 ? i + 36 : i;
-                Offhand.mc.field_71442_b.func_187098_a(0, slot, 0, ClickType.PICKUP, (EntityPlayer)player);
+                Offhand.mc.playerController.windowClick(0, slot, 0, ClickType.PICKUP, (EntityPlayer)player);
                 return;
             }
         }
         this.totems = 0;
-        for (ItemStack stack : player.field_71071_by.field_70462_a) {
-            if (stack.func_77973_b() != Items.field_190929_cY) continue;
-            this.totems += stack.func_190916_E();
+        for (ItemStack stack : player.inventory.mainInventory) {
+            if (stack.getItem() != Items.TOTEM_OF_UNDYING) continue;
+            this.totems += stack.getCount();
         }
-        if (player.func_184592_cb().func_77973_b() == Items.field_190929_cY) {
-            this.totems += player.func_184592_cb().func_190916_E();
+        if (player.getHeldItemOffhand().getItem() == Items.TOTEM_OF_UNDYING) {
+            this.totems += player.getHeldItemOffhand().getCount();
             return;
         }
-        if (this.soft.getValue() && !player.func_184592_cb().func_190926_b()) {
+        if (this.soft.getValue() && !player.getHeldItemOffhand().isEmpty()) {
             return;
         }
         if (this.dragging) {
-            Offhand.mc.field_71442_b.func_187098_a(0, 45, 0, ClickType.PICKUP, (EntityPlayer)player);
+            Offhand.mc.playerController.windowClick(0, 45, 0, ClickType.PICKUP, (EntityPlayer)player);
             this.dragging = false;
             return;
         }
         for (int i = 0; i < 45; ++i) {
-            if (player.field_71071_by.func_70301_a(i).func_77973_b() != Items.field_190929_cY) continue;
+            if (player.inventory.getStackInSlot(i).getItem() != Items.TOTEM_OF_UNDYING) continue;
             int slot = i < 9 ? i + 36 : i;
-            Offhand.mc.field_71442_b.func_187098_a(0, slot, 0, ClickType.PICKUP, (EntityPlayer)player);
+            Offhand.mc.playerController.windowClick(0, slot, 0, ClickType.PICKUP, (EntityPlayer)player);
             this.dragging = true;
             return;
         }

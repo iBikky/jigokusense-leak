@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -18,13 +20,13 @@ extends Module {
     @Override
     public void onEnable() {
         super.onEnable();
-        Gamemode.mc.field_71442_b.func_78746_a(GameType.CREATIVE);
+        Gamemode.mc.playerController.setGameType(GameType.CREATIVE);
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
-        Gamemode.mc.field_71442_b.func_78746_a(GameType.SURVIVAL);
+        Gamemode.mc.playerController.setGameType(GameType.SURVIVAL);
     }
 }
 

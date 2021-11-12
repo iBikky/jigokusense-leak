@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -14,7 +16,7 @@ import net.minecraft.util.math.Vec3d;
 public class MathUtil
 implements Global {
     public static Vec3d roundVec(Vec3d vec3d, int places) {
-        return new Vec3d(MathUtil.round(vec3d.field_72450_a, places), MathUtil.round(vec3d.field_72448_b, places), MathUtil.round(vec3d.field_72449_c, places));
+        return new Vec3d(MathUtil.round(vec3d.x, places), MathUtil.round(vec3d.y, places), MathUtil.round(vec3d.z, places));
     }
 
     public static double round(double value, int places) {

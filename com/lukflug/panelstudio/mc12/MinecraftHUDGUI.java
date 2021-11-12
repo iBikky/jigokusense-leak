@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -34,7 +36,7 @@ extends MinecraftGUI {
         if (this.getHUDGUI().isOn()) {
             this.getHUDGUI().toggle();
         }
-        Minecraft.func_71410_x().func_147108_a((GuiScreen)this);
+        Minecraft.getMinecraft().displayGuiScreen((GuiScreen)this);
     }
 
     public void render() {

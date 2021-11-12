@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -43,9 +45,9 @@ extends Module {
     private final Listener<PacketEvent.Send> receiveListener = new Listener<PacketEvent.Send>(event -> {
         if (event.getPacket() instanceof CPacketUseEntity) {
             CPacketUseEntity packet = (CPacketUseEntity)event.getPacket();
-            if (this.crits.getValue() && packet.func_149565_c().equals((Object)CPacketUseEntity.Action.ATTACK) && KillAura.mc.field_71439_g != null && KillAura.mc.field_71439_g.field_70122_E && this.isAttacking) {
-                KillAura.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayer.Position(KillAura.mc.field_71439_g.field_70165_t, KillAura.mc.field_71439_g.field_70163_u + (double)0.1f, KillAura.mc.field_71439_g.field_70161_v, false));
-                KillAura.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayer.Position(KillAura.mc.field_71439_g.field_70165_t, KillAura.mc.field_71439_g.field_70163_u, KillAura.mc.field_71439_g.field_70161_v, false));
+            if (this.crits.getValue() && packet.getAction().equals((Object)CPacketUseEntity.Action.ATTACK) && KillAura.mc.player != null && KillAura.mc.player.onGround && this.isAttacking) {
+                KillAura.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(KillAura.mc.player.posX, KillAura.mc.player.posY + (double)0.1f, KillAura.mc.player.posZ, false));
+                KillAura.mc.player.connection.sendPacket((Packet)new CPacketPlayer.Position(KillAura.mc.player.posX, KillAura.mc.player.posY, KillAura.mc.player.posZ, false));
             }
         }
     }, new Predicate[0]);
@@ -56,15 +58,15 @@ extends Module {
 
     @Override
     public void update() {
-        if (KillAura.mc.field_71441_e.field_73010_i.isEmpty()) {
+        if (KillAura.mc.world.playerEntities.isEmpty()) {
             return;
         }
-        if (this.onlySword.getValue() && !(KillAura.mc.field_71439_g.func_184614_ca().func_77973_b() instanceof ItemSword)) {
+        if (this.onlySword.getValue() && !(KillAura.mc.player.getHeldItemMainhand().getItem() instanceof ItemSword)) {
             return;
         }
         ArrayList<EntityPlayer> list = new ArrayList<EntityPlayer>();
-        for (EntityPlayer player : KillAura.mc.field_71441_e.field_73010_i) {
-            if (player == KillAura.mc.field_71439_g || (double)KillAura.mc.field_71439_g.func_70032_d((Entity)player) > this.range.getValue() || player.func_110143_aJ() <= 0.0f || player.field_70128_L || !FriendsManager.isFriend(player.func_70005_c_())) continue;
+        for (EntityPlayer player : KillAura.mc.world.playerEntities) {
+            if (player == KillAura.mc.player || (double)KillAura.mc.player.getDistance((Entity)player) > this.range.getValue() || player.getHealth() <= 0.0f || player.isDead || !FriendsManager.isFriend(player.getName())) continue;
             list.add(player);
         }
         if (list.isEmpty()) {
@@ -74,13 +76,13 @@ extends Module {
     }
 
     private void attack(EntityPlayer target) {
-        if (KillAura.mc.field_71439_g.func_184825_o(0.0f) >= 1.0f || !this.delay.getValue()) {
+        if (KillAura.mc.player.getCooledAttackStrength(0.0f) >= 1.0f || !this.delay.getValue()) {
             this.isAttacking = true;
             if (this.rotate.getValue()) {
-                JigokuSense.rotationManager.rotate(target.field_70165_t, target.field_70163_u, target.field_70161_v);
+                JigokuSense.rotationManager.rotate(target.posX, target.posY, target.posZ);
             }
-            KillAura.mc.field_71442_b.func_78764_a((EntityPlayer)KillAura.mc.field_71439_g, (Entity)target);
-            KillAura.mc.field_71439_g.func_184609_a(EnumHand.MAIN_HAND);
+            KillAura.mc.playerController.attackEntity((EntityPlayer)KillAura.mc.player, (Entity)target);
+            KillAura.mc.player.swingArm(EnumHand.MAIN_HAND);
             if (this.rotate.getValue()) {
                 JigokuSense.rotationManager.reset();
             }

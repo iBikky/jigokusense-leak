@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -18,15 +20,15 @@ extends Module {
 
     @Override
     public void update() {
-        if (this.entity.getValue() && Step.mc.field_71439_g.func_184187_bx() != null) {
-            Step.mc.field_71439_g.func_184187_bx().field_70138_W = (float)this.height.getValue();
+        if (this.entity.getValue() && Step.mc.player.getRidingEntity() != null) {
+            Step.mc.player.getRidingEntity().stepHeight = (float)this.height.getValue();
         }
-        Step.mc.field_71439_g.field_70138_W = (float)this.height.getValue();
+        Step.mc.player.stepHeight = (float)this.height.getValue();
     }
 
     @Override
     public void onDisable() {
-        Step.mc.field_71439_g.field_70138_W = 0.5f;
+        Step.mc.player.stepHeight = 0.5f;
     }
 }
 

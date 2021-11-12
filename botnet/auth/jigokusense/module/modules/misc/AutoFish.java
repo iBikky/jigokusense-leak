@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -28,18 +30,18 @@ extends Module {
     @EventHandler
     private final Listener<PacketEvent.Receive> receiveListener = new Listener<PacketEvent.Receive>(event -> {
         SPacketSoundEffect packet;
-        if (event.getPacket() instanceof SPacketSoundEffect && (packet = (SPacketSoundEffect)event.getPacket()).func_186978_a().equals(SoundEvents.field_187609_F)) {
-            if (AutoFish.mc.field_71439_g.func_184614_ca().func_77973_b() instanceof ItemFishingRod) {
-                AutoFish.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
-                AutoFish.mc.field_71439_g.func_184609_a(EnumHand.MAIN_HAND);
-                AutoFish.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
-                AutoFish.mc.field_71439_g.func_184609_a(EnumHand.MAIN_HAND);
+        if (event.getPacket() instanceof SPacketSoundEffect && (packet = (SPacketSoundEffect)event.getPacket()).getSound().equals(SoundEvents.ENTITY_BOBBER_SPLASH)) {
+            if (AutoFish.mc.player.getHeldItemMainhand().getItem() instanceof ItemFishingRod) {
+                AutoFish.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
+                AutoFish.mc.player.swingArm(EnumHand.MAIN_HAND);
+                AutoFish.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(EnumHand.MAIN_HAND));
+                AutoFish.mc.player.swingArm(EnumHand.MAIN_HAND);
             }
-            if (AutoFish.mc.field_71439_g.func_184592_cb().func_77973_b() instanceof ItemFishingRod) {
-                AutoFish.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(EnumHand.OFF_HAND));
-                AutoFish.mc.field_71439_g.func_184609_a(EnumHand.OFF_HAND);
-                AutoFish.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(EnumHand.OFF_HAND));
-                AutoFish.mc.field_71439_g.func_184609_a(EnumHand.OFF_HAND);
+            if (AutoFish.mc.player.getHeldItemOffhand().getItem() instanceof ItemFishingRod) {
+                AutoFish.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(EnumHand.OFF_HAND));
+                AutoFish.mc.player.swingArm(EnumHand.OFF_HAND);
+                AutoFish.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(EnumHand.OFF_HAND));
+                AutoFish.mc.player.swingArm(EnumHand.OFF_HAND);
             }
         }
     }, new Predicate[0]);

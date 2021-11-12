@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -29,11 +31,11 @@ extends Event {
     }
 
     public double getScreenWidth() {
-        return this.scaledResolution.func_78327_c();
+        return this.scaledResolution.getScaledWidth_double();
     }
 
     public double getScreenHeight() {
-        return this.scaledResolution.func_78324_d();
+        return this.scaledResolution.getScaledHeight_double();
     }
 }
 

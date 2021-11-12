@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -65,24 +67,24 @@ extends GuiScreen {
         }
     }
 
-    public void func_73863_a(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         MOUSE.setLocation(mouseX, mouseY);
         this.PANELS.forEach(IComponent::draw);
     }
 
-    protected void func_73864_a(int mouseX, int mouseY, int mouseButton) {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         MOUSE.setLocation(mouseX, mouseY);
         this.PANELS.forEach(p -> p.handleButton(mouseButton));
     }
 
-    protected void func_146286_b(int mouseX, int mouseY, int state) {
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
         MOUSE.setLocation(mouseX, mouseY);
         this.PANELS.forEach(p -> p.handleButton(-1));
     }
 
-    protected void func_73869_a(char typedChar, int keyCode) {
+    protected void keyTyped(char typedChar, int keyCode) {
         if (keyCode == 1) {
-            this.field_146297_k.func_147108_a(null);
+            this.mc.displayGuiScreen(null);
         }
         this.PANELS.forEach(p -> p.keyTyped(keyCode, typedChar));
     }

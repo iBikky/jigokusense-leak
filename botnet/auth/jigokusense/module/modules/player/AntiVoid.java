@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -13,17 +15,17 @@ extends Module {
 
     @Override
     public void update() {
-        if (AntiVoid.mc.field_71439_g.field_70163_u <= 0.5) {
-            AntiVoid.mc.field_71439_g.field_70701_bs = 10.0f;
-            AntiVoid.mc.field_71439_g.func_70664_aZ();
+        if (AntiVoid.mc.player.posY <= 0.5) {
+            AntiVoid.mc.player.moveVertical = 10.0f;
+            AntiVoid.mc.player.jump();
         } else {
-            AntiVoid.mc.field_71439_g.field_70701_bs = 0.0f;
+            AntiVoid.mc.player.moveVertical = 0.0f;
         }
     }
 
     @Override
     public void onDisable() {
-        AntiVoid.mc.field_71439_g.field_70701_bs = 0.0f;
+        AntiVoid.mc.player.moveVertical = 0.0f;
     }
 }
 

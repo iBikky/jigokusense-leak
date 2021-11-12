@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -43,12 +45,12 @@ public class InventoryUtil
 implements Global {
     public static int findHotbarBlock(Class c) {
         for (int i = 0; i < 9; ++i) {
-            ItemStack stack = InventoryUtil.mc.field_71439_g.field_71071_by.func_70301_a(i);
-            if (stack == ItemStack.field_190927_a) continue;
-            if (c.isInstance(stack.func_77973_b())) {
+            ItemStack stack = InventoryUtil.mc.player.inventory.getStackInSlot(i);
+            if (stack == ItemStack.EMPTY) continue;
+            if (c.isInstance(stack.getItem())) {
                 return i;
             }
-            if (!(stack.func_77973_b() instanceof ItemBlock) || !c.isInstance(((ItemBlock)stack.func_77973_b()).func_179223_d())) continue;
+            if (!(stack.getItem() instanceof ItemBlock) || !c.isInstance(((ItemBlock)stack.getItem()).getBlock())) continue;
             return i;
         }
         return -1;
@@ -56,10 +58,10 @@ implements Global {
 
     public static boolean holdingItem(Class clazz) {
         boolean result = false;
-        ItemStack stack = InventoryUtil.mc.field_71439_g.func_184614_ca();
+        ItemStack stack = InventoryUtil.mc.player.getHeldItemMainhand();
         result = InventoryUtil.isInstanceOf(stack, clazz);
         if (!result) {
-            ItemStack offhand = InventoryUtil.mc.field_71439_g.func_184592_cb();
+            ItemStack offhand = InventoryUtil.mc.player.getHeldItemOffhand();
             result = InventoryUtil.isInstanceOf(stack, clazz);
         }
         return result;
@@ -69,12 +71,12 @@ implements Global {
         if (stack == null) {
             return false;
         }
-        Item item = stack.func_77973_b();
+        Item item = stack.getItem();
         if (clazz.isInstance(item)) {
             return true;
         }
         if (item instanceof ItemBlock) {
-            Block block = Block.func_149634_a((Item)item);
+            Block block = Block.getBlockFromItem((Item)item);
             return clazz.isInstance(block);
         }
         return false;
@@ -87,7 +89,7 @@ implements Global {
     private static Map<Integer, ItemStack> getInventorySlots(int currentI, int last) {
         HashMap<Integer, ItemStack> fullInventorySlots = new HashMap<Integer, ItemStack>();
         for (int current = currentI; current <= last; ++current) {
-            fullInventorySlots.put(current, (ItemStack)InventoryUtil.mc.field_71439_g.field_71069_bz.func_75138_a().get(current));
+            fullInventorySlots.put(current, (ItemStack)InventoryUtil.mc.player.inventoryContainer.getInventory().get(current));
         }
         return fullInventorySlots;
     }
@@ -95,14 +97,14 @@ implements Global {
     public static List<Integer> findEmptySlots(boolean withXCarry) {
         ArrayList<Integer> outPut = new ArrayList<Integer>();
         for (Map.Entry<Integer, ItemStack> entry : InventoryUtil.getInventoryAndHotbarSlots().entrySet()) {
-            if (!entry.getValue().field_190928_g && entry.getValue().func_77973_b() != Items.field_190931_a) continue;
+            if (!entry.getValue().isEmpty && entry.getValue().getItem() != Items.AIR) continue;
             outPut.add(entry.getKey());
         }
         if (withXCarry) {
             for (int i = 1; i < 5; ++i) {
-                Slot craftingSlot = (Slot)InventoryUtil.mc.field_71439_g.field_71069_bz.field_75151_b.get(i);
-                ItemStack craftingStack = craftingSlot.func_75211_c();
-                if (!craftingStack.func_190926_b() && craftingStack.func_77973_b() != Items.field_190931_a) continue;
+                Slot craftingSlot = (Slot)InventoryUtil.mc.player.inventoryContainer.inventorySlots.get(i);
+                ItemStack craftingStack = craftingSlot.getStack();
+                if (!craftingStack.isEmpty() && craftingStack.getItem() != Items.AIR) continue;
                 outPut.add(i);
             }
         }
@@ -114,10 +116,10 @@ implements Global {
         float damage = 0.0f;
         for (int i = 9; i < 45; ++i) {
             ItemArmor armor;
-            ItemStack s = Minecraft.func_71410_x().field_71439_g.field_71069_bz.func_75139_a(i).func_75211_c();
-            if (s.func_77973_b() == Items.field_190931_a || !(s.func_77973_b() instanceof ItemArmor) || (armor = (ItemArmor)s.func_77973_b()).func_185083_B_() != type) continue;
-            float currentDamage = armor.field_77879_b + EnchantmentHelper.func_77506_a((Enchantment)Enchantments.field_180310_c, (ItemStack)s);
-            boolean cursed = binding && EnchantmentHelper.func_190938_b((ItemStack)s);
+            ItemStack s = Minecraft.getMinecraft().player.inventoryContainer.getSlot(i).getStack();
+            if (s.getItem() == Items.AIR || !(s.getItem() instanceof ItemArmor) || (armor = (ItemArmor)s.getItem()).getEquipmentSlot() != type) continue;
+            float currentDamage = armor.damageReduceAmount + EnchantmentHelper.getEnchantmentLevel((Enchantment)Enchantments.PROTECTION, (ItemStack)s);
+            boolean cursed = binding && EnchantmentHelper.hasBindingCurse((ItemStack)s);
             boolean bl = cursed;
             if (!(currentDamage > damage) || cursed) continue;
             damage = currentDamage;
@@ -132,11 +134,11 @@ implements Global {
             float damage = 0.0f;
             for (int i = 1; i < 5; ++i) {
                 ItemArmor armor;
-                Slot craftingSlot = (Slot)InventoryUtil.mc.field_71439_g.field_71069_bz.field_75151_b.get(i);
-                ItemStack craftingStack = craftingSlot.func_75211_c();
-                if (craftingStack.func_77973_b() == Items.field_190931_a || !(craftingStack.func_77973_b() instanceof ItemArmor) || (armor = (ItemArmor)craftingStack.func_77973_b()).func_185083_B_() != type) continue;
-                float currentDamage = armor.field_77879_b + EnchantmentHelper.func_77506_a((Enchantment)Enchantments.field_180310_c, (ItemStack)craftingStack);
-                boolean cursed = binding && EnchantmentHelper.func_190938_b((ItemStack)craftingStack);
+                Slot craftingSlot = (Slot)InventoryUtil.mc.player.inventoryContainer.inventorySlots.get(i);
+                ItemStack craftingStack = craftingSlot.getStack();
+                if (craftingStack.getItem() == Items.AIR || !(craftingStack.getItem() instanceof ItemArmor) || (armor = (ItemArmor)craftingStack.getItem()).getEquipmentSlot() != type) continue;
+                float currentDamage = armor.damageReduceAmount + EnchantmentHelper.getEnchantmentLevel((Enchantment)Enchantments.PROTECTION, (ItemStack)craftingStack);
+                boolean cursed = binding && EnchantmentHelper.hasBindingCurse((ItemStack)craftingStack);
                 boolean bl = cursed;
                 if (!(currentDamage > damage) || cursed) continue;
                 damage = currentDamage;
@@ -171,10 +173,10 @@ implements Global {
 
         public void run() {
             if (this.update) {
-                Global.mc.field_71442_b.func_78765_e();
+                Global.mc.playerController.updateController();
             }
             if (this.slot != -1) {
-                Global.mc.field_71442_b.func_187098_a(0, this.slot, 0, this.quickClick ? ClickType.QUICK_MOVE : ClickType.PICKUP, (EntityPlayer)Global.mc.field_71439_g);
+                Global.mc.playerController.windowClick(0, this.slot, 0, this.quickClick ? ClickType.QUICK_MOVE : ClickType.PICKUP, (EntityPlayer)Global.mc.player);
             }
         }
 

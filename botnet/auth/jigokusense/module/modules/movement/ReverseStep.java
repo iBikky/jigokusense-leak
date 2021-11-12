@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  */
@@ -16,11 +18,11 @@ extends Module {
 
     @Override
     public void update() {
-        if (ReverseStep.mc.field_71439_g.func_70090_H() || ReverseStep.mc.field_71439_g.func_180799_ab()) {
+        if (ReverseStep.mc.player.isInWater() || ReverseStep.mc.player.isInLava()) {
             return;
         }
-        if (ReverseStep.mc.field_71439_g.field_70122_E) {
-            ReverseStep.mc.field_71439_g.field_70181_x -= this.speed.getValue() / 10.0;
+        if (ReverseStep.mc.player.onGround) {
+            ReverseStep.mc.player.motionY -= this.speed.getValue() / 10.0;
         }
     }
 }

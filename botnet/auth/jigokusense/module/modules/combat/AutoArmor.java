@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -70,7 +72,7 @@ extends Module {
 
     @Override
     public void update() {
-        if (this.nullCheck() || AutoArmor.mc.field_71462_r instanceof GuiContainer && !(AutoArmor.mc.field_71462_r instanceof GuiInventory)) {
+        if (this.nullCheck() || AutoArmor.mc.currentScreen instanceof GuiContainer && !(AutoArmor.mc.currentScreen instanceof GuiInventory)) {
             return;
         }
         if (this.taskList.isEmpty()) {
@@ -81,53 +83,53 @@ extends Module {
             int slot3;
             ItemStack chest;
             int slot4;
-            if (this.mendingTakeOff.getValue() && InventoryUtil.holdingItem(ItemExpBottle.class) && AutoArmor.mc.field_71474_y.field_74313_G.func_151470_d() && AutoArmor.mc.field_71441_e.field_73010_i.stream().noneMatch(e -> e != AutoArmor.mc.field_71439_g && !FriendsManager.isFriend(e.func_70005_c_()) && AutoArmor.mc.field_71439_g.func_70032_d((Entity)e) <= (float)this.closestEnemy.getValue()) && !this.flag) {
+            if (this.mendingTakeOff.getValue() && InventoryUtil.holdingItem(ItemExpBottle.class) && AutoArmor.mc.gameSettings.keyBindUseItem.isKeyDown() && AutoArmor.mc.world.playerEntities.stream().noneMatch(e -> e != AutoArmor.mc.player && !FriendsManager.isFriend(e.getName()) && AutoArmor.mc.player.getDistance((Entity)e) <= (float)this.closestEnemy.getValue()) && !this.flag) {
                 int goods;
                 int dam;
                 int takeOff = 0;
                 for (Map.Entry<Integer, ItemStack> armorSlot : this.getArmor().entrySet()) {
                     ItemStack stack = armorSlot.getValue();
                     float percent = (float)this.repair.getValue() / 100.0f;
-                    dam = Math.round((float)stack.func_77958_k() * percent);
-                    if (dam >= (goods = stack.func_77958_k() - stack.func_77952_i())) continue;
+                    dam = Math.round((float)stack.getMaxDamage() * percent);
+                    if (dam >= (goods = stack.getMaxDamage() - stack.getItemDamage())) continue;
                     ++takeOff;
                 }
                 if (takeOff == 4) {
                     this.flag = true;
                 }
                 if (!this.flag) {
-                    ItemStack itemStack1 = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(5).func_75211_c();
-                    if (!itemStack1.field_190928_g) {
+                    ItemStack itemStack1 = AutoArmor.mc.player.inventoryContainer.getSlot(5).getStack();
+                    if (!itemStack1.isEmpty) {
                         int goods2;
                         float percent = (float)this.repair.getValue() / 100.0f;
-                        int dam2 = Math.round((float)itemStack1.func_77958_k() * percent);
-                        if (dam2 < (goods2 = itemStack1.func_77958_k() - itemStack1.func_77952_i())) {
+                        int dam2 = Math.round((float)itemStack1.getMaxDamage() * percent);
+                        if (dam2 < (goods2 = itemStack1.getMaxDamage() - itemStack1.getItemDamage())) {
                             this.takeOffSlot(5);
                         }
                     }
-                    ItemStack itemStack2 = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(6).func_75211_c();
-                    if (!itemStack2.field_190928_g) {
+                    ItemStack itemStack2 = AutoArmor.mc.player.inventoryContainer.getSlot(6).getStack();
+                    if (!itemStack2.isEmpty) {
                         int goods3;
                         float percent = (float)this.repair.getValue() / 100.0f;
-                        int dam3 = Math.round((float)itemStack2.func_77958_k() * percent);
-                        if (dam3 < (goods3 = itemStack2.func_77958_k() - itemStack2.func_77952_i())) {
+                        int dam3 = Math.round((float)itemStack2.getMaxDamage() * percent);
+                        if (dam3 < (goods3 = itemStack2.getMaxDamage() - itemStack2.getItemDamage())) {
                             this.takeOffSlot(6);
                         }
                     }
-                    ItemStack itemStack3 = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(7).func_75211_c();
-                    if (!itemStack3.field_190928_g) {
+                    ItemStack itemStack3 = AutoArmor.mc.player.inventoryContainer.getSlot(7).getStack();
+                    if (!itemStack3.isEmpty) {
                         float percent = (float)this.repair.getValue() / 100.0f;
-                        dam = Math.round((float)itemStack3.func_77958_k() * percent);
-                        if (dam < (goods = itemStack3.func_77958_k() - itemStack3.func_77952_i())) {
+                        dam = Math.round((float)itemStack3.getMaxDamage() * percent);
+                        if (dam < (goods = itemStack3.getMaxDamage() - itemStack3.getItemDamage())) {
                             this.takeOffSlot(7);
                         }
                     }
-                    ItemStack itemStack4 = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(8).func_75211_c();
-                    if (!itemStack4.field_190928_g) {
+                    ItemStack itemStack4 = AutoArmor.mc.player.inventoryContainer.getSlot(8).getStack();
+                    if (!itemStack4.isEmpty) {
                         int goods4;
                         float percent = (float)this.repair.getValue() / 100.0f;
-                        int dam4 = Math.round((float)itemStack4.func_77958_k() * percent);
-                        if (dam4 < (goods4 = itemStack4.func_77958_k() - itemStack4.func_77952_i())) {
+                        int dam4 = Math.round((float)itemStack4.getMaxDamage() * percent);
+                        if (dam4 < (goods4 = itemStack4.getMaxDamage() - itemStack4.getItemDamage())) {
                             this.takeOffSlot(8);
                         }
                     }
@@ -135,17 +137,17 @@ extends Module {
                 return;
             }
             this.flag = false;
-            ItemStack helm = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(5).func_75211_c();
-            if (helm.func_77973_b() == Items.field_190931_a && (slot4 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.HEAD, this.curse.getValue(), true)) != -1) {
+            ItemStack helm = AutoArmor.mc.player.inventoryContainer.getSlot(5).getStack();
+            if (helm.getItem() == Items.AIR && (slot4 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.HEAD, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(5, slot4);
             }
-            if ((chest = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(6).func_75211_c()).func_77973_b() == Items.field_190931_a && (slot3 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.CHEST, this.curse.getValue(), true)) != -1) {
+            if ((chest = AutoArmor.mc.player.inventoryContainer.getSlot(6).getStack()).getItem() == Items.AIR && (slot3 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.CHEST, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(6, slot3);
             }
-            if ((legging = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(7).func_75211_c()).func_77973_b() == Items.field_190931_a && (slot2 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.LEGS, this.curse.getValue(), true)) != -1) {
+            if ((legging = AutoArmor.mc.player.inventoryContainer.getSlot(7).getStack()).getItem() == Items.AIR && (slot2 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.LEGS, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(7, slot2);
             }
-            if ((feet = AutoArmor.mc.field_71439_g.field_71069_bz.func_75139_a(8).func_75211_c()).func_77973_b() == Items.field_190931_a && (slot = InventoryUtil.findArmorSlot(EntityEquipmentSlot.FEET, this.curse.getValue(), true)) != -1) {
+            if ((feet = AutoArmor.mc.player.inventoryContainer.getSlot(8).getStack()).getItem() == Items.AIR && (slot = InventoryUtil.findArmorSlot(EntityEquipmentSlot.FEET, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(8, slot);
             }
         }
@@ -193,7 +195,7 @@ extends Module {
     private Map<Integer, ItemStack> getInventorySlots(int current, int last) {
         HashMap<Integer, ItemStack> fullInventorySlots = new HashMap<Integer, ItemStack>();
         while (current <= last) {
-            fullInventorySlots.put(current, (ItemStack)AutoArmor.mc.field_71439_g.field_71069_bz.func_75138_a().get(current));
+            fullInventorySlots.put(current, (ItemStack)AutoArmor.mc.player.inventoryContainer.getInventory().get(current));
             ++current;
         }
         return fullInventorySlots;

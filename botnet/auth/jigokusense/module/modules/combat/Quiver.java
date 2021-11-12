@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -26,10 +28,10 @@ extends Module {
 
     @Override
     public void update() {
-        if (Quiver.mc.field_71439_g.field_71071_by.func_70448_g().func_77973_b() instanceof ItemBow && Quiver.mc.field_71439_g.func_184587_cr() && Quiver.mc.field_71439_g.func_184612_cw() >= 3) {
-            Quiver.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.field_177992_a, Quiver.mc.field_71439_g.func_174811_aO()));
-            Quiver.mc.field_71439_g.field_71174_a.func_147297_a((Packet)new CPacketPlayerTryUseItem(Quiver.mc.field_71439_g.func_184600_cs()));
-            Quiver.mc.field_71439_g.func_184597_cx();
+        if (Quiver.mc.player.inventory.getCurrentItem().getItem() instanceof ItemBow && Quiver.mc.player.isHandActive() && Quiver.mc.player.getItemInUseMaxCount() >= 3) {
+            Quiver.mc.player.connection.sendPacket((Packet)new CPacketPlayerDigging(CPacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, Quiver.mc.player.getHorizontalFacing()));
+            Quiver.mc.player.connection.sendPacket((Packet)new CPacketPlayerTryUseItem(Quiver.mc.player.getActiveHand()));
+            Quiver.mc.player.stopActiveHand();
         }
     }
 }

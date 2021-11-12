@@ -1,3 +1,5 @@
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\autty\Downloads\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
+
 /*
  * Decompiled with CFR 0.151.
  * 
@@ -43,8 +45,8 @@ public class CapeUtil {
     static {
         capeStuff = new ArrayList<ResourceLocation>();
         try {
-            capeStuff.add(Wrapper.mc.func_110434_K().func_110578_a("assets/textures", new DynamicTexture(ImageIO.read(new URL("https://imgur.com/a/W84LYTB")))));
-            capeStuff.add(Wrapper.mc.func_110434_K().func_110578_a("assets/textures", new DynamicTexture(ImageIO.read(new URL("https://imgur.com/a/W84LYTB")))));
+            capeStuff.add(Wrapper.mc.getTextureManager().getDynamicTextureLocation("assets/textures", new DynamicTexture(ImageIO.read(new URL("https://imgur.com/a/W84LYTB")))));
+            capeStuff.add(Wrapper.mc.getTextureManager().getDynamicTextureLocation("assets/textures", new DynamicTexture(ImageIO.read(new URL("https://imgur.com/a/W84LYTB")))));
         }
         catch (Exception e) {
             e.printStackTrace();
